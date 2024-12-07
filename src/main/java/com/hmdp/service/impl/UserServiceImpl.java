@@ -85,11 +85,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             // 如果不符合，返回错误信息
             return Result.fail("手机号格式错误");
         }
-
-        /*// 2、校验验证码
-        Object cacheCode = session.getAttribute("code");
-        String code = loginForm.getCode();*/
-
         // 2、从redis获取验证码作校验
         String cacheCode = stringRedisTemplate.opsForValue().get(LOGIN_CODE_KEY + phone);
         String code = loginForm.getCode();
@@ -105,9 +100,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             // 6、不存在，创建新用户并保存
             user = createUserWithPhone(phone);
         }
-
-        /*// 7、保存用户信息到 session 中
-        session.setAttribute("user", BeanUtil.copyProperties(user, UserDTO.class));*/
 
         // 7、保存用户信息到 redis 中
         // 7.1.随机生成token，作为登录令牌
