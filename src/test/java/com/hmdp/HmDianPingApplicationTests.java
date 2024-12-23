@@ -106,8 +106,8 @@ class HmDianPingApplicationTests {
         OutputStreamWriter osw = null;
         osw = new OutputStreamWriter(new FileOutputStream("D:\\Java_Code\\Heima Comment System\\token.txt"));
         //先模拟10个用户的登录
-        for (int i = 0; i < 981; i++) {
-            User user = userService.getById(i+1010);
+        for (int i = 0; i < 992; i++) {
+            User user = userService.getById(i+1995);
             phone = user.getPhone();
             //创建虚拟请求，模拟通过手机号，发送验证码
             ResultActions perform1 = mockMvc.perform(MockMvcRequestBuilders
